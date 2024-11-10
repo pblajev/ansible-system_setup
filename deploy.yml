@@ -1,0 +1,51 @@
+---
+- name: Create Users
+  hosts: all
+  roles:
+    - role: ansible_galaxy_role.motd
+    - { role: ansible_galaxy_role.users, users_list: '{{homeco_admins}}', sudo_access: 'yes' }
+    - { role: ansible_galaxy_role.users, users_list: '{{homeco_developers}}' }
+    - { role: ansible_galaxy_role.users, users_list: '{{users_old}}', delete_users: 'yes' }
+
+# Setup prompt to include the instance custom name
+- name: Setup prompt
+  hosts: all
+  tasks:
+    - name: cp prompt.sh
+      copy:
+        src: prompt.sh
+        dest: /etc/profile.d/prompt.sh
+        owner: root
+        group: root
+        mode: 0644
+
+- name: Disable root login
+  hosts: all
+  tasks:
+    - name: edit /etc/ssh/sshd_config
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^.*PermitRootLogin .*'
+        line: 'PermitRootLogin no'
+        state: present
+      notify:
+        - Restart ssh
+
+  handlers:
+    - name: Restart ssh
+      service: name=sshd state=restarted
+
+- name: Setup FirewallD
+  hosts: all
+  tags: setup_firewalld
+  tasks:
+    - name: systemctl start firewalld
+      service: name=firewalld enabled=yes state=started
+
+    - name: Allow SSH
+      firewalld:
+        permanent: yes
+        immediate: yes
+        service: ssh
+        state: enabled
+

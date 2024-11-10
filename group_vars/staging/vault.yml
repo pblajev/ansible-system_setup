@@ -1,0 +1,5 @@
+# Don't forget to encrypt this file:
+# ansible-vault encrypt vault.yml
+
+# Example of a vault.yml entry
+#vault_dbpass: 'Enter your password here'

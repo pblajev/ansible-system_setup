@@ -1,0 +1,11 @@
+- src: git@github.com:pblajev/ansible_galaxy_role.init.git
+  scm: git
+
+- src: git@github.com:pblajev/ansible_galaxy_role.motd.git
+  scm: git
+
+- src: git@github.com:pblajev/ansible_galaxy_role.package.git
+  scm: git
+
+- src: git@github.com:pblajev/ansible_galaxy_role.users.git
+  scm: git

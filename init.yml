@@ -1,0 +1,5 @@
+---
+- name: INIT Plays
+  hosts: all
+  roles:
+    - { role: ansible_galaxy_role.init, users_keys: '{{ users_ansible }}' }

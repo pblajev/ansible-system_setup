@@ -1,0 +1,27 @@
+---
+homeco_admins:
+  - name: user1
+    comment: User One
+    password: '!!'
+
+  - name: user2
+    comment: User Two
+    password: '!!'
+
+  - name: user3
+    comment: User Three
+    password: '!!'
+
+homeco_developers:
+  - name: user4
+    comment: User Four
+    password: '!!'
+
+  - name: user5
+    comment: User Five
+    password: '!!'
+
+users_old:
+  - name: user6
+  - name: user7
+  - name: user8
